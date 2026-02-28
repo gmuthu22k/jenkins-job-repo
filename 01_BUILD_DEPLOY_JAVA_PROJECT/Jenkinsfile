@@ -1,0 +1,19 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('clone Repo') {
+            git 'https://github.com/gmuthu22k/jenkins-job-repo.git'
+        }
+
+        stage('Build Docker image') {
+            sh 'docker build -t hello-java-app .'
+        }
+
+        stage('Run Container') {
+            steps {
+                sh 'docker run --rm hello-java-app'
+            }
+        }
+    }
+}
